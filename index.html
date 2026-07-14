@@ -260,24 +260,29 @@ h3{
     g[e] = g[e] || function () {
         (g[e].q = g[e].q || []).push(arguments);
     };
-    g[e].t = 1 * new Date();
 
     var s = document.createElement("script");
     s.async = true;
     s.src = n;
-    s.charset = "utf-8";
+
+    s.onload = function () {
+        console.log("Genesys script loaded");
+
+        Genesys("bootstrap", {
+            environment: "prod-euw1",
+            deploymentId: "c248e69e-8fd2-4120-ae8f-a34984656a8c"
+        });
+    };
+
+    s.onerror = function () {
+        console.error("Genesys script failed to load");
+    };
 
     document.head.appendChild(s);
 
 })(window,
    "Genesys",
    "https://apps.mypurecloud.ie/genesys-bootstrap/genesys.min.js");
-
-Genesys("bootstrap", {
-    environment: "prod-euw1",
-    deploymentId: "c248e69e-8fd2-4120-ae8f-a34984656a8c"
-});
 </script>
-
 </body>
 </html>
